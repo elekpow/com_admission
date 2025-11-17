@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+    <name>Admission</name>
+    <creationDate>Nov 2025</creationDate>
+    <author>John Smith</author>
+    <authorUrl>https://mb4.ru</authorUrl>
+    <copyright>John Smith</copyright>
+    <license>GPL v3</license>
+    <version>0.0.1</version>
+    <description>Admission Component</description>
+
+    <namespace path="src/">JohnSmith\Component\Admission</namespace>
+    
+    <scriptfile>script.php</scriptfile>
+
+    <!-- SQL файлы -->
+    <!-- <install> -->
+        <!-- <sql> -->
+            <!-- <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file> -->
+        <!-- </sql> -->
+    <!-- </install> -->
+    <!-- <uninstall> -->
+        <!-- <sql> -->
+            <!-- <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file> -->
+        <!-- </sql> -->
+    <!-- </uninstall> -->
+    <!-- <update> -->
+        <!-- <schemas> -->
+            <!-- <schemapath type="mysql">sql/updates/mysql</schemapath> -->
+        <!-- </schemas> -->
+    <!-- </update> -->
+	
+    <!-- Service Providers -->
+    <services>
+        <service provider="JohnSmith\Component\Admission\Administrator\Service\Provider" type="administrator"/>
+        <service provider="JohnSmith\Component\Admission\Site\Service\Provider" type="site"/>
+    </services>
+	
+    <!-- Фронтенд файлы -->
+    <files folder="site">
+        <folder>src</folder>
+        <folder>services</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>  <!-- ДОБАВЛЕНО -->
+        <filename>admission.php</filename>
+    </files>
+
+    <!-- Языковые файлы фронтенда -->
+    <languages folder="site/language">
+        <language tag="en-GB">en-GB/en-GB.com_admission.ini</language>
+    </languages>
+   
+    <administration>
+        <menu link="index.php?option=com_admission">Admission</menu>
+
+        <!-- Медиа файлы админки -->
+        <media folder="admin/media" destination="com_admission">
+            <folder>css</folder>
+            <filename>joomla.asset.json</filename>
+        </media>
+		
+        <files folder="admin">
+            <folder>forms</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+            <folder>media</folder>
+            <filename>access.xml</filename>
+            <filename>admission.php</filename>
+        </files>
+
+        <!-- Языковые файлы админки -->
+        <languages folder="admin/language">
+            <language tag="en-GB">en-GB/en-GB.com_admission.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_admission.sys.ini</language>
+        </languages>			
+    </administration>
+</extension>

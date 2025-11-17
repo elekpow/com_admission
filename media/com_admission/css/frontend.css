@@ -1,0 +1,123 @@
+/* Admission Component Frontend Styles */
+.com-admission {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.com-admission .page-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 1rem;
+}
+
+.admission-item {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.admission-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-color: #3498db;
+}
+
+.admission-item .card-body {
+    padding: 1.5rem;
+}
+
+.admission-item .card-title {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.admission-item .card-text {
+    color: #6c757d;
+    line-height: 1.7;
+}
+
+.admission-meta {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.meta-item {
+    margin-bottom: 0.5rem;
+}
+
+.meta-item:last-child {
+    margin-bottom: 0;
+}
+
+.meta-item strong {
+    color: #495057;
+}
+
+/* Status badges */
+.badge.bg-warning { background-color: #ffc107 !important; color: #212529; }
+.badge.bg-success { background-color: #28a745 !important; }
+.badge.bg-danger { background-color: #dc3545 !important; }
+.badge.bg-info { background-color: #17a2b8 !important; }
+.badge.bg-secondary { background-color: #6c757d !important; }
+
+/* Alert styles */
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 1.5rem;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.alert-icon {
+    float: left;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.alert-message h4 {
+    margin: 0 0 0.5rem 0;
+    color: inherit;
+}
+
+/* Button styles */
+.admission-actions .btn {
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.admission-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .com-admission .container {
+        padding: 0 15px;
+    }
+    
+    .admission-item .card-body {
+        padding: 1rem;
+    }
+    
+    .admission-meta .row > div {
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-title {
+        font-size: 1.75rem;
+    }
+}

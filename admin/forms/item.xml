@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset name="basic">
+        <field name="id" type="hidden" />
+        
+        <field name="title" 
+               type="text"
+               label="COM_ADMISSION_FIELD_TITLE_LABEL"
+               description="COM_ADMISSION_FIELD_TITLE_DESC"
+               size="40"
+               required="true"
+               class="inputbox" />
+               
+        <field name="description" 
+               type="textarea"
+               label="COM_ADMISSION_FIELD_DESCRIPTION_LABEL"
+               description="COM_ADMISSION_FIELD_DESCRIPTION_DESC"
+               rows="5"
+               cols="40" />
+               
+        <field name="email" 
+               type="email"
+               label="COM_ADMISSION_FIELD_EMAIL_LABEL"
+               description="COM_ADMISSION_FIELD_EMAIL_DESC"
+               size="40"
+               required="true"
+               class="inputbox" />
+               
+        <field name="phone" 
+               type="text"
+               label="COM_ADMISSION_FIELD_PHONE_LABEL"
+               description="COM_ADMISSION_FIELD_PHONE_DESC"
+               size="20"
+               class="inputbox" />
+               
+        <field name="status" 
+               type="list"
+               label="COM_ADMISSION_FIELD_STATUS_LABEL"
+               description="COM_ADMISSION_FIELD_STATUS_DESC"
+               default="pending">
+            <option value="pending">COM_ADMISSION_STATUS_PENDING</option>
+            <option value="approved">COM_ADMISSION_STATUS_APPROVED</option>
+            <option value="rejected">COM_ADMISSION_STATUS_REJECTED</option>
+            <option value="in_review">COM_ADMISSION_STATUS_IN_REVIEW</option>
+        </field>
+    </fieldset>
+    
+    <fieldset name="publishing">
+        <field name="state" 
+               type="list"
+               label="JSTATUS"
+               description="JFIELD_PUBLISHED_DESC"
+               default="1">
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field>
+        
+        <field name="created" 
+               type="calendar"
+               label="JGLOBAL_FIELD_CREATED_LABEL"
+               disabled="true"
+               format="%Y-%m-%d %H:%M:%S" />
+               
+        <field name="created_by" 
+               type="text"
+               label="JGLOBAL_FIELD_CREATED_BY_LABEL"
+               disabled="true" />
+    </fieldset>
+</form>
