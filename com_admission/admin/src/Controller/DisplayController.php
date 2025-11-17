@@ -8,16 +8,14 @@ use Joomla\CMS\Factory;
 
 class DisplayController extends BaseController
 {
-    protected $default_view = 'admission';
-
-    public function display($cachable = false, $urlparams = array())
+    public function display($cachable = false, $urlparams = [])
     {
-        $view = $this->input->get('view', $this->default_view);
-        $layout = $this->input->get('layout', 'default');
-        
+        // Устанавливаем default view
+        $view = $this->input->get('view', 'admission');
         $this->input->set('view', $view);
-        $this->input->set('layout', $layout);
-
-        return parent::display($cachable, $urlparams);
+        
+        parent::display($cachable, $urlparams);
+        
+        return $this;
     }
 }

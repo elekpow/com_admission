@@ -3,50 +3,39 @@ namespace JohnSmith\Component\Admission\Administrator\Model;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Factory;
 
-class AdmissionModel extends ListModel
+class AdmissionModel extends AdminModel
 {
-    /**
-     * Method to get items for dashboard
-     */
-    public function getItems()
+    public function getForm($data = [], $loadData = true)
     {
-        // Простая реализация - возвращаем тестовые данные
-        $items = array();
-        
-        // Тестовые данные
-        $items[] = (object) array(
-            'id' => 1,
-            'title' => 'Sample Admission Item 1',
-            'state' => 1,
-            'created' => Factory::getDate()->toSql()
+        // Форма для редактирования заявки в админке
+        $form = $this->loadForm(
+            'com_admission.admission',
+            'admission',
+            ['control' => 'jform', 'load_data' => $loadData]
         );
         
-        $items[] = (object) array(
-            'id' => 2,
-            'title' => 'Sample Admission Item 2', 
-            'state' => 1,
-            'created' => Factory::getDate()->toSql()
+        if (empty($form)) {
+            return false;
+        }
+        
+        return $form;
+    }
+    
+    protected function loadFormData()
+    {
+        // Загрузка данных для формы
+        $data = Factory::getApplication()->getUserState(
+            'com_admission.edit.admission.data',
+            []
         );
         
-        return $items;
-    }
-
-    /**
-     * Method to get pagination (заглушка)
-     */
-    public function getPagination()
-    {
-        return null;
-    }
-
-    /**
-     * Method to get model state (заглушка)
-     */
-    public function getState()
-    {
-        return null;
+        if (empty($data)) {
+            $data = $this->getItem();
+        }
+        
+        return $data;
     }
 }

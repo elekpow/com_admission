@@ -67,6 +67,7 @@
             <folder>media</folder>
             <filename>access.xml</filename>
             <filename>admission.php</filename>
+			<filename>config.xml</filename>   <!-- ДОБАВИТЬ -->
         </files>
 
         <!-- Языковые файлы админки -->

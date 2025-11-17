@@ -8,5 +8,8 @@
         <action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
         <action name="core.edit.state" title="JACTION_EDITSTATE" description="JACTION_EDITSTATE_COMPONENT_DESC" />
         <action name="core.edit.own" title="JACTION_EDITOWN" description="JACTION_EDITOWN_COMPONENT_DESC" />
+        <action name="admission.submit" title="Submit Applications" description="Allow submitting new applications" />
+        <action name="admission.manage" title="Manage Applications" description="Allow managing all applications" />
+        <action name="admission.view" title="View Applications" description="Allow viewing applications" />
     </section>
 </access>
