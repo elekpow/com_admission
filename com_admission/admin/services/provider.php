@@ -1,13 +1,23 @@
 <?php
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Extension\Service\Provider\MVCFactory;
+use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\DI\Container;
 use Joomla\DI\ServiceProviderInterface;
 
-return new class implements ServiceProviderInterface
+class ServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        // Пустой провайдер - Joomla будет использовать автозагрузку
+        $container->registerServiceProvider(new MVCFactory('\\JohnSmith\\Component\\Admission'));
+        
+        $container->set(
+            MVCFactoryInterface::class,
+            function (Container $container) {
+                $factory = $container->get(MVCFactory::class);
+                return $factory;
+            }
+        );
     }
-};
+}

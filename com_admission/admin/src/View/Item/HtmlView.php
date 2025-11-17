@@ -5,79 +5,48 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
-use Joomla\CMS\Router\Route;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Toolbar\Toolbar;
 
 class HtmlView extends BaseHtmlView
 {
+    protected $form;
     protected $item;
-    protected $isNew = true;
-
+    
     public function display($tpl = null)
     {
-        $this->item = $this->loadItem();
+        $this->form = $this->get('Form');
+        $this->item = $this->get('Item');
         
+        // Проверяем ошибки
+        if (count($errors = $this->get('Errors'))) {
+            throw new \Exception(implode("\n", $errors), 500);
+        }
+        
+        // Устанавливаем тулбар
         $this->addToolbar();
+        
         parent::display($tpl);
     }
-
+    
     protected function addToolbar()
     {
-        $title = $this->isNew ? 'Добавить заявку' : 'Редактировать заявку';
-        $document = Factory::getDocument();
-        $document->setTitle($title . ' - Admission');
-    }
-
-    /**
-     * Загрузка данных заявки
-     */
-    protected function loadItem()
-    {
-        $app = Factory::getApplication();
-        $input = $app->input;
-        $id = $input->getInt('id', 0);
+        Factory::getApplication()->input->set('hidemainmenu', true);
         
-        // Пробуем получить данные из сессии (при ошибках валидации)
-        $data = $app->getUserState('com_admission.edit.item.data', []);
+        $isNew = ($this->item->id == 0);
         
-        if (!empty($data)) {
-            // Очищаем данные сессии
-            $app->setUserState('com_admission.edit.item.data', null);
-            $this->isNew = empty($data['id']);
-            return (object) $data;
+        ToolbarHelper::title($isNew ? Text::_('COM_ADMISSION_MANAGER_ITEM_NEW') : 
+            Text::_('COM_ADMISSION_MANAGER_ITEM_EDIT'), 'pencil-2 article');
+        
+        // Для существующих записей показываем кнопки сохранения
+        if (!$isNew) {
+            ToolbarHelper::apply('item.apply');
+            ToolbarHelper::save('item.save');
+            ToolbarHelper::save2new('item.save2new');
         }
         
-        if ($id > 0) {
-            // Загружаем существующую запись из базы
-            try {
-                $db = Factory::getDbo();
-                $query = $db->getQuery(true);
-                
-                $query->select('*')
-                      ->from($db->quoteName('#__admission_items'))
-                      ->where($db->quoteName('id') . ' = ' . $id);
-                
-                $db->setQuery($query);
-                $item = $db->loadObject();
-                
-                if ($item) {
-                    $this->isNew = false;
-                    return $item;
-                }
-            } catch (Exception $e) {
-                $app->enqueueMessage('Ошибка загрузки заявки: ' . $e->getMessage(), 'error');
-            }
-        }
-        
-        // Новая заявка или ошибка загрузки
-        $this->isNew = true;
-        return (object) [
-            'id' => 0,
-            'title' => '',
-            'description' => '',
-            'email' => '',
-            'phone' => '',
-            'status' => 'pending',
-            'state' => 1
-        ];
+        ToolbarHelper::save2copy('item.save2copy');
+        ToolbarHelper::cancel('item.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE');
     }
 }

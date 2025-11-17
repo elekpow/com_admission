@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_ADMISSION_VIEW_ITEMS_TITLE">
+        <message>
+            <![CDATA[COM_ADMISSION_VIEW_ITEMS_DESC]]>
+        </message>
+    </layout>
+    
+    <!-- Параметры меню -->
+    <fields name="request">
+        <fieldset name="request">
+            <field name="view"
+                   type="hidden"
+                   default="items"
+                   />
+        </fieldset>
+    </fields>
+    
+    <fields name="params">
+        <fieldset name="basic">
+            <field name="menu_title"
+                   type="text"
+                   label="COM_MENUS_ITEM_FIELD_ALTERNATE_TITLE_LABEL"
+                   description="COM_MENUS_ITEM_FIELD_ALTERNATE_TITLE_DESC"
+                   />
+                   
+            <field name="menu_show"
+                   type="list"
+                   label="COM_MENUS_ITEM_FIELD_TITLE_DISPLAY_LABEL"
+                   description="COM_MENUS_ITEM_FIELD_TITLE_DISPLAY_DESC"
+                   default="0"
+                   >
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+        </fieldset>
+        
+        <fieldset name="advanced">
+            <field name="page_title"
+                   type="text"
+                   label="COM_MENUS_ITEM_FIELD_PAGE_TITLE_LABEL"
+                   description="COM_MENUS_ITEM_FIELD_PAGE_TITLE_DESC"
+                   />
+                   
+            <field name="show_page_heading"
+                   type="list"
+                   label="COM_MENUS_ITEM_FIELD_PAGE_HEADING_LABEL"
+                   description="COM_MENUS_ITEM_FIELD_PAGE_HEADING_DESC"
+                   default="0"
+                   >
+                <option value="0">JHIDE</option>
+                <option value="1">JSHOW</option>
+            </field>
+            
+            <field name="page_heading"
+                   type="text"
+                   label="COM_MENUS_ITEM_FIELD_PAGE_HEADING_TEXT_LABEL"
+                   description="COM_MENUS_ITEM_FIELD_PAGE_HEADING_TEXT_DESC"
+                   />
+        </fieldset>
+    </fields>
+</metadata>

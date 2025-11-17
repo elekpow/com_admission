@@ -52,6 +52,11 @@
    
     <administration>
         <menu link="index.php?option=com_admission">Admission</menu>
+		
+		<submenu>
+            <!-- Добавляем подменю для админки -->
+            <menu link="option=com_admission&amp;view=admission">COM_ADMISSION_SUBMENU_APPLICATIONS</menu>
+        </submenu>
 
         <!-- Медиа файлы админки -->
         <media folder="admin/media" destination="com_admission">
@@ -65,6 +70,7 @@
             <folder>src</folder>
             <folder>tmpl</folder>
             <folder>media</folder>
+			<folder>menu</folder>  <!-- ДОБАВИТЬ папку с меню -->
             <filename>access.xml</filename>
             <filename>admission.php</filename>
 			<filename>config.xml</filename>   <!-- ДОБАВИТЬ -->

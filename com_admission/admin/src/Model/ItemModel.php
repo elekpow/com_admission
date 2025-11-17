@@ -6,76 +6,52 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Table\Table;
-use Joomla\CMS\Language\Text;
 
 class ItemModel extends AdminModel
 {
-    public $typeAlias = 'com_admission.item';
-
-    public function getTable($name = 'Item', $prefix = 'Administrator', $options = array())
+    public function getForm($data = [], $loadData = true)
     {
-        return Table::getInstance($name, $prefix, $options);
-    }
-
-    public function getForm($data = array(), $loadData = true)
-    {
-        $form = $this->loadForm('com_admission.item', 'item', array('control' => 'jform', 'load_data' => $loadData));
-
+        // Получаем форму
+        $form = $this->loadForm(
+            'com_admission.item',
+            'item',
+            ['control' => 'jform', 'load_data' => $loadData]
+        );
+        
         if (empty($form)) {
             return false;
         }
-
+        
         return $form;
     }
-
+    
     protected function loadFormData()
     {
-        $data = Factory::getApplication()->getUserState('com_admission.edit.item.data', array());
-
+        // Проверяем сессию на наличие ранее введенных данных формы
+        $data = Factory::getApplication()->getUserState(
+            'com_admission.edit.item.data',
+            []
+        );
+        
         if (empty($data)) {
             $data = $this->getItem();
         }
-
+        
         return $data;
     }
-
+    
     public function getItem($pk = null)
     {
-        $item = parent::getItem($pk);
-
-        // Если это новая запись, устанавливаем значения по умолчанию
-        if ($item->id == 0) {
-            $item->created = Factory::getDate()->toSql();
-            $item->created_by = Factory::getUser()->id;
+        if ($item = parent::getItem($pk)) {
+            // Дополнительная обработка данных если нужно
+            return $item;
         }
-
-        return $item;
+        
+        return false;
     }
-
-    protected function prepareTable($table)
+    
+    public function getTable($name = 'Item', $prefix = 'Administrator', $options = [])
     {
-        $date = Factory::getDate();
-        $user = Factory::getUser();
-
-        if (empty($table->id)) {
-            // New record
-            $table->created = $date->toSql();
-            $table->created_by = $user->id;
-        } else {
-            // Existing record
-            $table->modified = $date->toSql();
-            $table->modified_by = $user->id;
-        }
-    }
-
-    public function save($data)
-    {
-        // Устанавливаем значения по умолчанию для новых записей
-        if (empty($data['id'])) {
-            $data['created'] = Factory::getDate()->toSql();
-            $data['created_by'] = Factory::getUser()->id;
-        }
-
-        return parent::save($data);
+        return parent::getTable($name, $prefix, $options);
     }
 }
